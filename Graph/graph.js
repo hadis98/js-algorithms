@@ -40,26 +40,70 @@ class graph {
         }
         delete this.adjacencyList[vertex];
     }
+    depthfirst_traversal(startNode) {
+
+        const results = [];
+        const visited_vertices = {};
+        const adjacencyList = this.adjacencyList;
+
+        function dfs(vertex) {
+            if (!vertex) { //if vertex is empty
+                return null;
+            }
+            visited_vertices[vertex] = true;
+            results.push(vertex);
+            console.log(adjacencyList[vertex]);
+            // for (const v of adjacencyList[vertex]) {
+            //     if (!visited_vertices[v]) {
+            //         dfs(v);
+            //     }
+            // } //second way:
+            adjacencyList[vertex].forEach(neighbor => {
+                if (!visited_vertices[neighbor]) {
+                    return dfs(neighbor);
+                }
+            })
+        }
+        dfs(startNode);
+        console.log(visited_vertices);
+        return results;
+    }
 }
 
 let g = new graph();
-g.addVertex("America");
-g.addVertex("Germany");
-g.addVertex("UnitedKingdom");
-g.addVertex("Italy");
-g.addVertex("Sweden");
-console.log(g);
-g.addEdge("America", "Germany");
-g.addEdge("America", "Italy");
-g.addEdge("UnitedKingdom", "Italy");
-g.addEdge("Sweden", "Italy");
-g.addEdge("Sweden", "Germany");
-g.addEdge("Italy", "Germany");
-g.addEdge("Sweden", "UnitedKingdom");
-console.log(g);
-g.removeEdge2("Sweden", "Italy");
+// g.addVertex("America");
+// g.addVertex("Germany");
+// g.addVertex("UnitedKingdom");
+// g.addVertex("Italy");
+// g.addVertex("Sweden");
+// console.log(g);
+// g.addEdge("America", "Germany");
+// g.addEdge("America", "Italy");
+// g.addEdge("UnitedKingdom", "Italy");
+// g.addEdge("Sweden", "Italy");
+// g.addEdge("Sweden", "Germany");
+// g.addEdge("Italy", "Germany");
+// g.addEdge("Sweden", "UnitedKingdom");
+// console.log(g);
+// g.removeEdge2("Sweden", "Italy");
 // console.log(g);
 // g.removeVertex('Germany');
-console.log('after removing Germany: ');
-g.removeVertex2("Germany");
-console.log(g);
+// console.log('after removing Germany: ');
+// g.removeVertex2("Germany");
+// console.log(g);
+g.addVertex("A");
+g.addVertex("B");
+g.addVertex("C");
+g.addVertex("D");
+g.addVertex("E");
+g.addVertex("F");
+
+g.addEdge('A', 'B');
+g.addEdge('A', 'C');
+g.addEdge('B', 'D');
+g.addEdge('C', 'E');
+g.addEdge('D', 'E');
+g.addEdge('D', 'F');
+g.addEdge('E', 'F');
+console.log(g.adjacencyList);
+console.log(g.depthfirst_traversal('A'));
