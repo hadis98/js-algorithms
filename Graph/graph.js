@@ -75,7 +75,7 @@ class graph {
         let currentVertex;
         visited_vertices[startNode] = true;
         while (stack.length) {
-            console.log(stack);
+            console.log('stack: ', stack);
             currentVertex = stack.pop();
             result.push(currentVertex);
             this.adjacencyList[currentVertex].forEach((neighbor) => {
@@ -84,6 +84,24 @@ class graph {
                     stack.push(neighbor);
                 }
             });
+        }
+        return result;
+    }
+    breadthFirst_traversal(startNode) {
+        const queue = [startNode];
+        const visited_vertices = {};
+        const result = [];
+        visited_vertices[startNode] = true;
+        let currentVertex;
+        while (queue.length) {
+            currentVertex = queue.shift();
+            result.push(currentVertex);
+            this.adjacencyList[currentVertex].forEach(neighbor => {
+                if (!visited_vertices[neighbor]) {
+                    visited_vertices[neighbor] = true;
+                    queue.push(neighbor);
+                }
+            })
         }
         return result;
     }
@@ -124,6 +142,7 @@ g.addEdge("C", "E");
 g.addEdge("D", "E");
 g.addEdge("D", "F");
 g.addEdge("E", "F");
-console.log(g.adjacencyList);
+console.log('AdjacencyList: ', g.adjacencyList);
 // console.log(g.depthfirst_traversal_recursive);
-console.log(g.depthfirst_traversal_iterative("A"));
+console.log('depthfirst: ', g.depthfirst_traversal_iterative("A"));
+console.log('breadthFirst: ', g.breadthFirst_traversal("A"));
