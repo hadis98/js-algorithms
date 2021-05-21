@@ -40,14 +40,14 @@ class graph {
         }
         delete this.adjacencyList[vertex];
     }
-    depthfirst_traversal(startNode) {
-
+    depthfirst_traversal_recursive(startNode) {
         const results = [];
         const visited_vertices = {};
         const adjacencyList = this.adjacencyList;
 
         function dfs(vertex) {
-            if (!vertex) { //if vertex is empty
+            if (!vertex) {
+                //if vertex is empty
                 return null;
             }
             visited_vertices[vertex] = true;
@@ -58,15 +58,34 @@ class graph {
             //         dfs(v);
             //     }
             // } //second way:
-            adjacencyList[vertex].forEach(neighbor => {
+            adjacencyList[vertex].forEach((neighbor) => {
                 if (!visited_vertices[neighbor]) {
                     return dfs(neighbor);
                 }
-            })
+            });
         }
         dfs(startNode);
         console.log(visited_vertices);
         return results;
+    }
+    depthfirst_traversal_iterative(startNode) {
+        const stack = [startNode];
+        const visited_vertices = {};
+        const result = [];
+        let currentVertex;
+        visited_vertices[startNode] = true;
+        while (stack.length) {
+            console.log(stack);
+            currentVertex = stack.pop();
+            result.push(currentVertex);
+            this.adjacencyList[currentVertex].forEach((neighbor) => {
+                if (!visited_vertices[neighbor]) {
+                    visited_vertices[neighbor] = true;
+                    stack.push(neighbor);
+                }
+            });
+        }
+        return result;
     }
 }
 
@@ -98,12 +117,13 @@ g.addVertex("D");
 g.addVertex("E");
 g.addVertex("F");
 
-g.addEdge('A', 'B');
-g.addEdge('A', 'C');
-g.addEdge('B', 'D');
-g.addEdge('C', 'E');
-g.addEdge('D', 'E');
-g.addEdge('D', 'F');
-g.addEdge('E', 'F');
+g.addEdge("A", "B");
+g.addEdge("A", "C");
+g.addEdge("B", "D");
+g.addEdge("C", "E");
+g.addEdge("D", "E");
+g.addEdge("D", "F");
+g.addEdge("E", "F");
 console.log(g.adjacencyList);
-console.log(g.depthfirst_traversal('A'));
+// console.log(g.depthfirst_traversal_recursive);
+console.log(g.depthfirst_traversal_iterative("A"));
