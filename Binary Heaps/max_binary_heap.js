@@ -72,3 +72,12 @@ console.log(heap.extractMax());
 console.log(heap);
 console.log(heap.extractMax());
 console.log(heap);
+
+// ‌Big O of Binary Heaps:
+//insertion: O(logn)
+//Removal:O(logn)
+//Search:O(n)
+//binary heaps are very useful data structure for sorting, and implementing other data structures like priority queues
+// MaxHeap: every parent is larger than its children
+//MinHeap:every parent is smaller than its children
+//we can represent heaps using arrays
