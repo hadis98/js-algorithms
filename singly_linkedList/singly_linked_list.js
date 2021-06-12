@@ -23,6 +23,31 @@ class singlyLinkedList {
         this.length++;
         return this;
     }
+
+    traverse() {
+        let current = this.head;
+        while (current) {
+            console.log(current.val);
+            current = current.next;
+        }
+    }
+
+    pop() {
+        if (!this.head) {
+            return undefined;
+        }
+        let current = this.head;
+        let prev = this.head;
+        while (current.next) {
+            prev = current;
+            current = current.next;
+        }
+
+        this.tail = prev;
+        this.tail.next = null;
+        this.length--;
+        return prev;
+    }
 }
 
 // const first = new Node("hi");
@@ -31,3 +56,14 @@ class singlyLinkedList {
 // first.next.next.next = new Node("are");
 // first.next.next.next.next = new Node(" you?");
 // console.log(first);
+
+const list = new singlyLinkedList();
+list.push("hello");
+list.push("hadis");
+list.push("how");
+list.push("are");
+list.push("you");
+console.log('traverse list: ');
+list.traverse();
+console.log('Deleted Node: ', list.pop());
+console.log('print List: ', list);
