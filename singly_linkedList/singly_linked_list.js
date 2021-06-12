@@ -46,7 +46,24 @@ class singlyLinkedList {
         this.tail = prev;
         this.tail.next = null;
         this.length--;
-        return prev;
+        if (this.length === 0) {
+            this.head = null;
+            this.tail = null;
+        }
+        return current;
+    }
+    shift() {
+        if (!this.head) {
+            return undefined;
+        }
+        const deleted = this.head;
+        this.head = this.head.next;
+        this.length--;
+        if (this.length === 0) {
+            this.head = null;
+            this.tail = null;
+        }
+        return deleted;
     }
 }
 
@@ -66,4 +83,6 @@ list.push("you");
 console.log('traverse list: ');
 list.traverse();
 console.log('Deleted Node: ', list.pop());
+console.log('print List: ', list);
+console.log('Shifted Node: ', list.shift());
 console.log('print List: ', list);
