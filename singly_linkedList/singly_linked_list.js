@@ -65,6 +65,18 @@ class singlyLinkedList {
         }
         return deleted;
     }
+    unshift(value) {
+        const newNode = new Node(value);
+        if (!this.head) {
+            this.head = new Node(value);
+            this.tail = this.head;
+        } else {
+            newNode.next = this.head;
+            this.head = newNode;
+        }
+        this.length++;
+        return this;
+    }
 }
 
 // const first = new Node("hi");
@@ -85,4 +97,6 @@ list.traverse();
 console.log('Deleted Node: ', list.pop());
 console.log('print List: ', list);
 console.log('Shifted Node: ', list.shift());
+console.log('print List: ', list);
+list.unshift('welcome');
 console.log('print List: ', list);
