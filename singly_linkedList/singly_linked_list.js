@@ -77,6 +77,26 @@ class singlyLinkedList {
         this.length++;
         return this;
     }
+    get(index) {
+        if (index < 0 || index >= this.length) {
+            return null;
+        }
+
+        let current = this.head;
+        let curIdx = 0;
+        // while (current) {
+        //     if (curIdx === index) {
+        //         return current;
+        //     }
+        //     current = current.next;
+        //     curIdx++;
+        // }
+        while (curIdx !== index) {
+            current = current.next;
+            curIdx++;
+        }
+        return current;
+    }
 }
 
 // const first = new Node("hi");
@@ -100,3 +120,5 @@ console.log('Shifted Node: ', list.shift());
 console.log('print List: ', list);
 list.unshift('welcome');
 console.log('print List: ', list);
+console.log(list.get(0));
+console.log(list.get(3));
