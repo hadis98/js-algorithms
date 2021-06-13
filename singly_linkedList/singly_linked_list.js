@@ -97,6 +97,14 @@ class singlyLinkedList {
         }
         return current;
     }
+    set(value, index) {
+        const node = this.get(index);
+        if (!node) {
+            return false;
+        }
+        node.val = value;
+        return true;
+    }
 }
 
 // const first = new Node("hi");
@@ -122,3 +130,4 @@ list.unshift('welcome');
 console.log('print List: ', list);
 console.log(list.get(0));
 console.log(list.get(3));
+list.set('where ', 2);
