@@ -112,16 +112,34 @@ class singlyLinkedList {
         }
         if (index === this.length) {
             this.push(newNode);
-        } else if (index === 0) {
-            this.unshift(newNode);
-        } else {
-            const prev = this.get(index - 1);
-            const temp = prev.next;
-            prev.next = newNode;
-            newNode.next = temp;
+            return true;
         }
+        if (index === 0) {
+            this.unshift(newNode);
+            return true;
+        }
+        const prev = this.get(index - 1);
+        const temp = prev.next;
+        prev.next = newNode;
+        newNode.next = temp;
         this.length++;
         return true;
+    }
+    remove(index) {
+        if (index < 0 || index >= this.length) {
+            return undefined;
+        }
+        if (index === this.length - 1) {
+            return this.pop();
+        }
+        if (index === 0) {
+            this.shift();
+        }
+        const prev = this.get(index - 1);
+        const removed = prev.next;
+        prev.next = removed.next;
+        this.length--;
+        return removed;
     }
 }
 
@@ -138,15 +156,17 @@ list.push("hadis");
 list.push("how");
 list.push("are");
 list.push("you");
-console.log('traverse list: ');
+console.log("traverse list: ");
 list.traverse();
-console.log('Deleted Node: ', list.pop());
-console.log('print List: ', list);
-console.log('Shifted Node: ', list.shift());
-console.log('print List: ', list);
-list.unshift('welcome');
-console.log('print List: ', list);
+console.log("Deleted Node: ", list.pop());
+console.log("print List: ", list);
+console.log("Shifted Node: ", list.shift());
+console.log("print List: ", list);
+list.unshift("welcome");
+console.log("print List: ", list);
 console.log(list.get(0));
 console.log(list.get(3));
-list.set('where ', 2);
-list.insert('test', 2);
+list.set("where ", 2);
+list.insert("test", 2);
+list.remove(1);
+list.traverse();
