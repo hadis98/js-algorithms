@@ -141,7 +141,37 @@ class singlyLinkedList {
         this.length--;
         return removed;
     }
+    reverse() {
+        let node = this.head;
+        this.head = this.tail;
+        this.tail = node;
+        let next;
+        let prev = null;
+        for (let i = 0; i < this.length; i++) {
+            next = node.next;
+            node.next = prev;
+            prev = node;
+            node = next;
+        }
+        return this;
+    }
+    print() {
+        let arr = [];
+        let current = this.head;
+        while (current) {
+            arr.push(current.val);
+            current = current.next;
+        }
+        console.log(arr);
+    }
 }
+/*
+insertion:O(1)
+Removal from begining:O(1) 
+Removal from end:O(n)
+searching:O(n)
+access:O(n)
+*/
 
 // const first = new Node("hi");
 // first.next = new Node("there");
@@ -151,22 +181,22 @@ class singlyLinkedList {
 // console.log(first);
 
 const list = new singlyLinkedList();
-list.push("hello");
-list.push("hadis");
-list.push("how");
-list.push("are");
-list.push("you");
-console.log("traverse list: ");
-list.traverse();
+list.push("1");
+list.push("5");
+list.push("10");
+list.push("20");
+list.push("33");
 console.log("Deleted Node: ", list.pop());
-console.log("print List: ", list);
+list.print();
 console.log("Shifted Node: ", list.shift());
-console.log("print List: ", list);
-list.unshift("welcome");
-console.log("print List: ", list);
+list.print();
+list.unshift("78");
+list.print();
 console.log(list.get(0));
 console.log(list.get(3));
-list.set("where ", 2);
-list.insert("test", 2);
+list.set("28 ", 2);
+list.insert("12", 2);
 list.remove(1);
-list.traverse();
+list.print();
+list.reverse()
+list.print();
